@@ -4,13 +4,24 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
       jshint: {
-        all: ['gruntfile.js', 'plugin.js']
+        gruntfile: ['gruntfile.js'],
+        js: ['plugin.js']
       },
       uglify: {
         dist: {
           files: {
             'plugin.min.js': ['plugin.js']
           }
+        }
+      },
+      watch: {
+        gruntfile: {
+          files: 'gruntfile.js',
+          tasks: ['jshint:gruntfile'],
+        },
+        js: {
+          files: ['plugin.js'],
+          tasks: ['jshint:js'],
         }
       },
       bump: {
@@ -33,5 +44,6 @@ module.exports = function (grunt) {
       },
     });
 
-    grunt.registerTask('default', ['jshint','uglify']);
+    grunt.registerTask('default', ['jshint','watch']);
+    grunt.registerTask('build', ['jshint','uglify']);
 };
