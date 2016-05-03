@@ -3,9 +3,13 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
-      jshint: {
-        gruntfile: ['gruntfile.js'],
-        js: ['plugin.js']
+      standard: {
+        options: {
+          format: true
+        },
+        js: {
+          src: ['plugin.js']
+        }
       },
       uglify: {
         dist: {
@@ -19,13 +23,13 @@ module.exports = function (grunt) {
         //   files: 'package.json',
         //   options: { reload: true }
         // },
-        gruntfile: {
-          files: 'gruntfile.js',
-          tasks: ['jshint:gruntfile'],
-        },
+        // gruntfile: {
+        //   files: 'gruntfile.js',
+        //   tasks: ['jshint:gruntfile'],
+        // },
         js: {
           files: ['plugin.js'],
-          tasks: ['jshint:js'],
+          tasks: ['standard:js'],
         }
       },
       bump: {
@@ -48,6 +52,6 @@ module.exports = function (grunt) {
       },
     });
 
-    grunt.registerTask('default', ['jshint','watch']);
-    grunt.registerTask('build', ['jshint','uglify']);
+    grunt.registerTask('default', ['standard','watch']);
+    grunt.registerTask('build', ['standard','uglify']);
 };
