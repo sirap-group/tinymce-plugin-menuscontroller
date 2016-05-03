@@ -24,10 +24,10 @@ function createPlugin (editor) {
   this.getMenuByName = getMenuByName
   this.getToolbars = getToolbars
 
-  // trigger an event 'app:mceMenuItemRendered:<menu_item_id>' for each menu item when its parent menu is rendered
-  $('body').on('app:mceMenuRendered', function (evt, menu) {
+  // trigger an event 'menusController:mceMenuItemRendered:<menu_item_id>' for each menu item when its parent menu is rendered
+  $('body').on('menusController:mceMenuRendered', function (evt, menu) {
     $(menu).find('.mce-menu-item').each(function (i, menuItem) {
-      $(menu).trigger('app:mceMenuItemRendered:' + $(menuItem).attr('id'))
+      $(menu).trigger('menusController:mceMenuItemRendered:' + $(menuItem).attr('id'))
     })
   })
 
@@ -87,8 +87,8 @@ function observeMenuRendering () {
         // menus are renders once at time
         if (menus.length > 1) throw new Error('ERROR: there is many menus rendered ! This case is not implemented !')
 
-        // trigger an 'app:mceMenuRendered' event with a 'evt.data.menu' property
-        var menuRenderedEvent = $.Event('app:mceMenuRendered')
+        // trigger an 'menusController:mceMenuRendered' event with a 'evt.data.menu' property
+        var menuRenderedEvent = $.Event('menusController:mceMenuRendered')
         $('body').trigger(menuRenderedEvent, menus[0])
       }
     })
