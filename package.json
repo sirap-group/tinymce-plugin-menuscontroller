@@ -1,5 +1,5 @@
 {
-  "name": "menuscontroller",
+  "name": "tinymce-plugin-menuscontroller",
   "version": "0.1.0",
   "description": "A plugin that helps to handle and control tinymce&#39;s menu bars, menus and menu items",
   "main": "plugin.js",
