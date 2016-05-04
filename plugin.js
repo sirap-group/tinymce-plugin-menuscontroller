@@ -16,6 +16,14 @@ var tinymce = window.tinymce
 // register the createPlugin function
 tinymce.PluginManager.add('menuscontroller', createPlugin)
 
+/**
+ * The plugin function definition
+ * @constructor
+ * @description The plugin expose an API and triggers two types of events
+ * @param {tinymce.Editor}
+ * @event menusController:mceMenuRendered triggered when a menu of the editor's menu bar is rendered. Fired once by menu.
+ * @event menusController:mceMenuItemRendered triggered when a menu item of any of menubar's menu is rendered (just after the parent menu is rendered).
+ */
 function createPlugin (editor) {
   // expose the plugin API
   // example of usage:
