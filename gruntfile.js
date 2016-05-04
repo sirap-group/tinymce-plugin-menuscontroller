@@ -21,14 +21,15 @@ module.exports = function (grunt) {
       }
     },
     watch: {
-      // package:  {
-      //   files: 'package.json',
-      //   options: { reload: true }
-      // },
-      // gruntfile: {
-      //   files: 'gruntfile.js',
-      //   tasks: ['jshint:gruntfile'],
-      // },
+      package: {
+        files: 'package.json',
+        options: { reload: true }
+      },
+      gruntfile: {
+        files: 'gruntfile.js',
+        tasks: ['standard:gruntfile'],
+        options: {reload: true}
+      },
       js: {
         files: ['plugin.js'],
         tasks: ['standard:js']
