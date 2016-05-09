@@ -3,22 +3,12 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     standard: {
-      options: {
-        format: true
-      },
-      gruntfile: {
-        src: ['gruntfile.js']
-      },
-      js: {
-        src: ['plugin.js']
-      }
+      options: { format: false },
+      gruntfile: { src: ['gruntfile.js'] },
+      js: { src: ['plugin.js'] }
     },
     uglify: {
-      dist: {
-        files: {
-          'plugin.min.js': ['plugin.js']
-        }
-      }
+      dist: { files: { 'plugin.min.js': ['plugin.js'] } }
     },
     watch: {
       package: {
