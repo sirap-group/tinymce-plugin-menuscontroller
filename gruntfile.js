@@ -22,7 +22,8 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['plugin.js'],
-        tasks: ['standard:js']
+        tasks: ['standard:js'],
+        options: {reload: true}
       }
     },
     bump: {
