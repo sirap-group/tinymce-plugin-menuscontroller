@@ -10,7 +10,7 @@
 
 // browser globals
 var MutationObserver = window.MutationObserver
-var $ = window.$
+var $ = window.jQuery
 var tinymce = window.tinymce
 
 // register the createPlugin function
@@ -19,10 +19,23 @@ tinymce.PluginManager.add('menuscontroller', createPlugin)
 /**
  * The plugin function definition
  * @constructor
- * @description The plugin expose an API and triggers two types of events
+ * @description
+ * The plugin expose an API and triggers two types of events
+ * Fires menusController:mceMenuRendered when a menu of the editor's menu bar is rendered. Fired once by menu.
+ * Fires menusController:mceMenuItemRendered when a menu item of any of menubar's menu is rendered (just after the parent menu is rendered).
  * @param {tinymce.Editor}
- * @event menusController:mceMenuRendered triggered when a menu of the editor's menu bar is rendered. Fired once by menu.
- * @event menusController:mceMenuItemRendered triggered when a menu item of any of menubar's menu is rendered (just after the parent menu is rendered).
+ * @fires menusController:mceMenuItemRendered
+ * @fires menusController:mceMenuRendered
+ * @example
+  $('body').on('menusController:mceMenuRendered', function (evt, menu) {
+    console.log('menu', menu)
+  })
+ * @example
+  $('body').on('menusController:mceMenuItemRendered', function (evt, itemID) {
+    var menuItemSelector = '#' + itemID
+    var $menuItem = $(menuItemSelector)
+    console.log('$menuItem', $menuItem)
+  })
  */
 function createPlugin (editor) {
   // expose the plugin API
@@ -34,8 +47,9 @@ function createPlugin (editor) {
 
   // trigger an event 'menusController:mceMenuItemRendered:<menu_item_id>' for each menu item when its parent menu is rendered
   $('body').on('menusController:mceMenuRendered', function (evt, menu) {
-    $(menu).find('.mce-menu-item').each(function (i, menuItem) {
-      $(menu).trigger('menusController:mceMenuItemRendered:' + $(menuItem).attr('id'))
+    var $menu = $(menu)
+    $menu.find('.mce-menu-item').each(function (i, menuItem) {
+      $menu.trigger('menusController:mceMenuItemRendered', $(menuItem).attr('id'))
     })
   })
 
@@ -96,8 +110,7 @@ function observeMenuRendering () {
         if (menus.length > 1) throw new Error('ERROR: there is many menus rendered ! This case is not implemented !')
 
         // trigger an 'menusController:mceMenuRendered' event with a 'evt.data.menu' property
-        var menuRenderedEvent = $.Event('menusController:mceMenuRendered')
-        $('body').trigger(menuRenderedEvent, menus[0])
+        $('body').trigger('menusController:mceMenuRendered', menus[0])
       }
     })
   }
