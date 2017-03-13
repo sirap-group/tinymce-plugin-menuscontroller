@@ -101,7 +101,7 @@ So you can handle the rendered event of your custom menu item listening on it:
       }
     )
 
-# MenusController API (v0.3.0+)
+# Plugin API (v0.3.0+)
 
 > A the time of wrinting (Monday, mars the 13th, 2017), the last released version is the `v0.2.1`. But the `v0.3.0` is planned to be released soon, and will provide a new event, more useful than the last.
 
