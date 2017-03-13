@@ -50,17 +50,29 @@ So you need to :
 
 ## Instance Methods
 
+### getMenubar()
+
 Get the menu bar:
 
     menusCtl.getMenubar()
+
+**Returns:** (jQuery object) the menu bar
+
+### getMenuByName(String: name)
 
 Get each menu by the name it was registered with:
 
     menusCtl.getMenuByName(String: name)
 
+**Returns:** (jQuery object) the wanted menu
+
+### getToolbars()
+
 Get the toolbars
 
-    menusCtl.getToolbars
+    menusCtl.getToolbars()
+
+**Returns:** (jQuery object) the toolbars
 
 ## Events
 
